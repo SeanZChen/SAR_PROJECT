@@ -17,9 +17,15 @@ def sample(cfg):
         os.makedirs(cfg.save_root)
     for cat in cats:
         original_dir = os.path.join(cfg.original_root, 'TRAIN', cat)
+        save_dir = os.path.join(cfg.save_root, 'TRAIN', cat)
+        if not os.path.exists(save_dir)
         imgs = os.listdir(original_dir)
         sample_size = min(len(imgs), cfg.sample_size)
         selected = random.sample(imgs, sample_size)
+        for item in selected:
+            selected_dir = os.path.join(original_dir, item)
+            # new_dir = os.path.join(save_dir, item)
+            os.system("cp %s %s"%(selected_dir, save_dir))
 
 
 def main():
