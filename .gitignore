@@ -2,7 +2,10 @@
 *.pyc
 *__pycache__*
 checkpoint
-data*
+data
+data_R*
+data_c*
+data_small*
 .vscode/
 *.jpg
 *.zip
