@@ -10,7 +10,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 
 class AConv(nn.Module):
-    def __init__(self):
+    def __init__(self, num_classes=10):
         super(AConv, self).__init__()
         # self.convnet = nn.ModuleList()
         self.conv1 = nn.Conv2d(3, 32, 5, 2, 2)
@@ -28,7 +28,7 @@ class AConv(nn.Module):
         self.conv5 = nn.Conv2d(128, 256, 5, 1, 2)
         self.bn5 = nn.BatchNorm2d(256)
         # self.dropout = nn.Dropout(p=0.2)
-        self.conv_out = nn.Conv2d(256, 10, 5, 1, 2)
+        self.conv_out = nn.Conv2d(256, num_classes, 5, 1, 2)
         self.pooler5 = nn.AdaptiveMaxPool2d((1,1))
         '''
         for layer in [self.conv1, self.conv2, self.conv3, self.conv4, self.conv_out]:

@@ -4,4 +4,7 @@
 checkpoint
 data*
 .vscode/
+*.jpg
+*.zip
+*tiny*
 

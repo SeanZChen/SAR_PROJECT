@@ -82,7 +82,11 @@ def calc(root1, root2):
         img = img[center_h-44:center_h+44, center_w-44:center_w+44]
         # print(img.shape)
         img = cv2.cvtColor(img,cv2.COLOR_BGR2GRAY) 
+        img_list2.append(img)
 
+    # print(len(img_list1))
+    # print(len(img_list2))
+    similarity = 0
     for img1 in img_list1:
         for img2 in img_list2:
             # similarity += ssim(img1, img2)
@@ -92,6 +96,7 @@ def calc(root1, root2):
     return similarity
 
 def main():
+    '''
     parser = argparse.ArgumentParser(description='Training efficient networks')
     parser.add_argument('--data', default='./data', help='path to dataset')
     cfg = parser.parse_args()
@@ -100,6 +105,29 @@ def main():
         val_root = os.path.join(cfg.data, 'TEST', cat)
         similarity = calc(train_root, val_root)
         print(cat, similarity)
+    '''
+    img1 = cv2.imread('avg_train.jpg')
+    img2 = cv2.imread('avg_test.jpg')
+    img3 = cv2.imread('avg_train_Rotate30.jpg')
+    img4 = cv2.imread('avg_Rotate360train.jpg')
+    img5 = cv2.imread('avg_train_HF.jpg')
+    img1 = cv2.cvtColor(img1,cv2.COLOR_BGR2GRAY) 
+    img2 = cv2.cvtColor(img2,cv2.COLOR_BGR2GRAY) 
+    img3 = cv2.cvtColor(img3,cv2.COLOR_BGR2GRAY) 
+    img4 = cv2.cvtColor(img4,cv2.COLOR_BGR2GRAY) 
+    img5 = cv2.cvtColor(img5,cv2.COLOR_BGR2GRAY) 
+    img6 = cv2.imread('avg_train_Rotate10.jpg')
+    img6 = cv2.cvtColor(img6,cv2.COLOR_BGR2GRAY) 
+    sim_R10 = ssim(img6, img2)
+    img7 = cv2.imread('avg_105train.jpg')
+    img7 = cv2.cvtColor(img7,cv2.COLOR_BGR2GRAY) 
+    sim_C = ssim(img7, img2)
+    
+    sim_base = ssim(img1, img2)
+    sim_R30 = ssim(img3, img2)
+    sim_R360 = ssim(img4, img2)
+    sim_HF = ssim(img5, img2)
+    print(sim_base, sim_R10, sim_R30, sim_R360, sim_HF, sim_C)
 
 if __name__ == '__main__':
     main()
